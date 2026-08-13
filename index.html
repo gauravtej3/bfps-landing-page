@@ -521,7 +521,7 @@
   // ---------------------------------------------------------------
   const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwDEINtbVoC9koQlSbBrp6_qXWl-EM4u4Gl1YGu-mhORKerq5jXqGks-ZfZNk-847eiGQ/exec';
 
-  async function handleLeadSubmit(form, statusEl, extraFields) {
+  async function handleLeadSubmit(form, statusEl, extraFields, successMessage, onSuccess) {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
     Object.assign(payload, extraFields, { submittedAt: new Date().toISOString() });
@@ -546,8 +546,9 @@
 
       statusEl.classList.remove('text-gray-500');
       statusEl.classList.add('text-secondary');
-      statusEl.textContent = "Thank you! Our admissions team will contact you shortly.";
+      statusEl.textContent = successMessage || "Thank you! Our admissions team will contact you shortly.";
       form.reset();
+      if (typeof onSuccess === 'function') onSuccess();
     } catch (err) {
       statusEl.classList.remove('text-gray-500');
       statusEl.classList.add('text-red-600');
@@ -555,11 +556,31 @@
     }
   }
 
+  // The actual guide PDF: drop your file at assets/guides/reclaim-focus-guide.pdf
+  // (exact name) and it will start downloading automatically the moment
+  // someone submits the "Get the Free Guide" form. No other code changes needed.
+  const GUIDE_PDF_PATH = 'assets/guides/reclaim-focus-guide.pdf';
+
+  function triggerGuideDownload() {
+    const link = document.createElement('a');
+    link.href = GUIDE_PDF_PATH;
+    link.download = 'Reclaim-Focus-BFPS-Guide.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
   const guideForm = document.getElementById('guideForm');
   const guideFormStatus = document.getElementById('guideFormStatus');
   guideForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    handleLeadSubmit(guideForm, guideFormStatus, { intent: 'Download Screen-Time Guide', source: 'lead-magnet' });
+    handleLeadSubmit(
+      guideForm,
+      guideFormStatus,
+      { intent: 'Download Screen-Time Guide', source: 'lead-magnet' },
+      'Thank you! Your guide download should start automatically.',
+      triggerGuideDownload
+    );
   });
 
   const admissionsForm = document.getElementById('admissionsForm');
