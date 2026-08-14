@@ -231,8 +231,12 @@
   <section id="junior" class="py-16 md:py-24 bg-secondary">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
       <div class="order-2 md:order-1">
-        <div class="aspect-[4/3] rounded-2xl bg-secondary-dark/40 border border-white/10 flex items-center justify-center text-white/60 text-sm">
-          Kokoon &ndash; The Pre-School &mdash; campus photo placeholder
+        <div class="aspect-[4/3] rounded-2xl bg-secondary-dark/40 border border-white/10 flex items-center justify-center text-white/60 text-sm relative overflow-hidden">
+          <span>Kokoon &ndash; The Pre-School &mdash; campus photo placeholder</span>
+          <!-- Kokoon students/activity photo: drop the file at assets/photos/kokoon-campus.jpg -->
+          <img src="assets/photos/kokoon-campus.jpg" alt="Students at Kokoon - The Pre-School"
+               class="absolute inset-0 w-full h-full object-cover"
+               onerror="this.style.display='none';" />
         </div>
       </div>
       <div class="order-1 md:order-2 text-white">
@@ -298,8 +302,12 @@
         </a>
       </div>
       <div>
-        <div class="aspect-[4/3] rounded-2xl bg-primary-dark/40 border border-white/10 flex items-center justify-center text-white/60 text-sm">
-          AI Tech Lab &mdash; campus photo placeholder
+        <div class="aspect-[4/3] rounded-2xl bg-primary-dark/40 border border-white/10 flex items-center justify-center text-white/60 text-sm relative overflow-hidden">
+          <span>AI Tech Lab &mdash; campus photo placeholder</span>
+          <!-- Senior Wing / AI Tech Lab photo: drop the file at assets/photos/ai-tech-lab.jpg -->
+          <img src="assets/photos/ai-tech-lab.jpg" alt="Students in the AI Tech Lab, Senior Wing"
+               class="absolute inset-0 w-full h-full object-cover"
+               onerror="this.style.display='none';" />
         </div>
       </div>
     </div>
