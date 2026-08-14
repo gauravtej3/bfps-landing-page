@@ -22,8 +22,20 @@ this script's mapping from payload fields to sheet columns.
 5. `Deploy > Manage deployments` > pencil (Edit) icon on the existing
    deployment > Version: **New version** > Deploy. This keeps the same
    `/exec` URL, so `index.html` never needs to change.
-6. Submit a test lead on the live site and confirm each value lands
-   under its correct header.
+6. To verify it works, either:
+   - Submit a test lead on the live site, **or**
+   - In the Apps Script editor, select **`doTest`** from the function
+     dropdown next to the Run button (not `doPost`) and click **Run**.
+     `doTest` fakes a realistic form submission and calls `doPost` with
+     it, so you can confirm a row lands under the right headers without
+     touching the live site. Delete the test row from the sheet after.
+
+   ⚠️ If you click **Run** on `doPost` itself, you will always get
+   `TypeError: Cannot read properties of undefined (reading 'postData')`.
+   That is expected and **not a bug** — `doPost` only receives a real
+   event object when Google's servers invoke it for an actual HTTP
+   POST; the editor's Run button calls it with no arguments. Use
+   `doTest` to test manually instead.
 
 `Code.gs` maps values to columns **by header name**, not by fixed
 position — so reordering or adding columns in the sheet won't break it

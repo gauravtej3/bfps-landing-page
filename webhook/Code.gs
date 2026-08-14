@@ -66,3 +66,33 @@ function doPost(e) {
   return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * TEST-ONLY: run this function (not doPost) from the Apps Script editor's
+ * "Run" button to verify the logic without submitting the real form.
+ *
+ * Clicking Run on doPost() itself will always throw
+ * "Cannot read properties of undefined (reading 'postData')" — that is
+ * expected and NOT a bug. doPost only receives a real event object (e)
+ * when Google's servers invoke it for an actual HTTP POST; the editor's
+ * Run button calls it with no arguments at all. Use doTest() instead —
+ * it fakes a realistic postData payload and calls doPost() with it, so
+ * you can confirm a row lands in the right columns and then just delete
+ * that test row from the sheet afterward.
+ */
+function doTest() {
+  var fakeEvent = {
+    postData: {
+      contents: JSON.stringify({
+        name: 'Test Parent',
+        phone: '9999999999',
+        childAge: '5',
+        intent: 'Download Screen-Time Guide',
+        source: 'lead-magnet',
+        submittedAt: new Date().toISOString()
+      })
+    }
+  };
+  var result = doPost(fakeEvent);
+  Logger.log(result.getContent());
+}
