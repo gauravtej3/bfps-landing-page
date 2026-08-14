@@ -18,7 +18,7 @@ this script's mapping from payload fields to sheet columns.
 2. `Extensions > Apps Script`
 3. Paste in the contents of `Code.gs` (overwrite what's there), Save.
 4. Make sure row 1 (headers) reads exactly, left to right:
-   `Timestamp | Source | Name | Phone | Child's Class/Age | Intent`
+   `Timestamp | Session | Source | Name | Phone | Child's Class/Age | Intent`
 5. `Deploy > Manage deployments` > pencil (Edit) icon on the existing
    deployment > Version: **New version** > Deploy. This keeps the same
    `/exec` URL, so `index.html` never needs to change.
@@ -40,3 +40,13 @@ this script's mapping from payload fields to sheet columns.
 `Code.gs` maps values to columns **by header name**, not by fixed
 position — so reordering or adding columns in the sheet won't break it
 again as long as the header text still matches a key in `fieldMap`.
+
+## Session tagging
+
+Every lead is stamped with a `Session` column taken from `index.html`'s
+`ADMISSIONS_SESSION` constant (e.g. `2026–27`). This is what lets the
+same running sheet/webhook carry across admission cycles — when
+`ADMISSIONS_SESSION` is updated each April for the next session, new
+leads automatically get tagged with the new value while older rows
+keep their original session, so you can always tell them apart in the
+same sheet without starting a new one.

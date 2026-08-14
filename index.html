@@ -533,7 +533,7 @@
   async function handleLeadSubmit(form, statusEl, extraFields, successMessage, onSuccess) {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
-    Object.assign(payload, extraFields, { submittedAt: new Date().toISOString() });
+    Object.assign(payload, extraFields, { session: ADMISSIONS_SESSION, submittedAt: new Date().toISOString() });
 
     statusEl.classList.remove('hidden', 'text-red-600', 'text-secondary');
     statusEl.textContent = 'Submitting...';

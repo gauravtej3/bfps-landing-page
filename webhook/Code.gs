@@ -19,12 +19,17 @@
  * freely reordered or new ones added in the sheet without breaking
  * anything or requiring another code change.
  *
+ * 'Session' tags each lead with index.html's ADMISSIONS_SESSION constant
+ * (e.g. "2026–27"), so leads stay identifiable by admissions cycle even
+ * after that constant is updated for the next year — no need for a new
+ * sheet or a new script each session.
+ *
  * HOW TO APPLY:
  * 1. Open the Sheet: https://docs.google.com/spreadsheets/d/1BK1r88FSGV5ZIXQ_3fyixMQW8E6Bjuoa9faRMdUjEak/edit
  * 2. Extensions > Apps Script
  * 3. Replace the existing code with the contents of this file, Save.
  * 4. Set row 1 (header row) to exactly, in this order:
- *      Timestamp | Source | Name | Phone | Child's Class/Age | Intent
+ *      Timestamp | Session | Source | Name | Phone | Child's Class/Age | Intent
  * 5. Deploy > Manage deployments > pencil (Edit) icon on the existing
  *    deployment > Version: "New version" > Deploy.
  *    (This keeps the same /exec URL — index.html does NOT need to change.)
@@ -39,6 +44,7 @@ function doPost(e) {
   // the key must exactly match the header text in row 1 of the sheet.
   var fieldMap = {
     'Timestamp': data.submittedAt || new Date().toISOString(),
+    'Session': data.session || '',
     'Source': data.source || '',
     'Name': data.name || '',
     'Phone': data.phone || '',
@@ -89,6 +95,7 @@ function doTest() {
         childAge: '5',
         intent: 'Download Screen-Time Guide',
         source: 'lead-magnet',
+        session: '2026–27',
         submittedAt: new Date().toISOString()
       })
     }
