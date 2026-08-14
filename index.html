@@ -365,7 +365,7 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         <div>
-          <span class="text-gold-dark font-semibold text-sm uppercase tracking-wide">Admissions 2026&ndash;27</span>
+          <span id="admissionsSession" class="text-gold-dark font-semibold text-sm uppercase tracking-wide">Admissions 2026&ndash;27</span>
           <h2 class="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-primary mt-2">
             Book a Campus Visit or Enquire Now
           </h2>
@@ -512,6 +512,15 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------------------------------------------------------------
+  // Admissions session label
+  // The ONLY place the admission year appears on this page. Each
+  // April, when the next session opens, just change this one string
+  // (e.g. '2027–28') — nothing else on the page needs to change.
+  // ---------------------------------------------------------------
+  const ADMISSIONS_SESSION = '2026–27';
+  document.getElementById('admissionsSession').textContent = 'Admissions ' + ADMISSIONS_SESSION;
 
   // ---------------------------------------------------------------
   // Form submission handler
