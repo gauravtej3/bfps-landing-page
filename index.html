@@ -7,16 +7,14 @@
 <meta name="description" content="Admissions open at Bright Future Public School, Jaipur (302004). Kokoon - The Pre-School (PG-1st) and AI-powered Senior Wing (7th-10th). Book a visit or call now." />
 
 <!-- ================= TRACKING PLACEHOLDERS ================= -->
-<!-- Google Analytics (GA4) - replace G-XXXXXXXXXX with the real Measurement ID -->
-<!--
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Analytics (GA4) - active, Measurement ID for BFPS Jaipur Landing Page property -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HBJ1F42B4G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-HBJ1F42B4G');
 </script>
--->
 
 <!-- Meta (Facebook/Instagram) Pixel - replace YOUR_PIXEL_ID with the real Pixel ID -->
 <!--
@@ -557,9 +555,9 @@
         body: JSON.stringify(payload),
       });
 
-      // Meta Pixel / GA conversion event placeholders
-      // if (typeof fbq === 'function') fbq('track', 'Lead');
-      // if (typeof gtag === 'function') gtag('event', 'generate_lead');
+      // Meta Pixel / GA conversion event
+      // if (typeof fbq === 'function') fbq('track', 'Lead'); // Pixel not active yet
+      if (typeof gtag === 'function') gtag('event', 'generate_lead');
 
       statusEl.classList.remove('text-gray-500');
       statusEl.classList.add('text-secondary');
