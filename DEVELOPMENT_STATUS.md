@@ -49,13 +49,23 @@ non-technical replacements. Nothing outstanding here.
 
 ## Tracking (GA4 / Meta Pixel)
 
-**Status: scaffolded, not activated.** Both script blocks exist in `index.html`'s `<head>`,
-correctly structured, but HTML-commented-out with placeholder IDs (`G-XXXXXXXXXX`,
-`YOUR_PIXEL_ID`) since no real GA4 property or Meta Pixel had been created yet as of the last build
-session. A commented-out `generate_lead` conversion-event call also already exists in the form
-submit handler, ready to uncomment alongside the Pixel/GA4 blocks. This is the only outstanding
-code-adjacent gap — see `FEATURE_MATRIX.md` rows 17–19 and the ready prompt in
-`CLAUDE_CODE_PROMPTS.md` ("Phase — Activate tracking").
+**Status: active, live. Activated 2026-09-11.**
+
+- **GA4:** Measurement ID `G-HBJ1F42B4G`, property "BFPS Jaipur Landing Page" (newly created under
+  `gauravtej@gmail.com`'s GA4 account, separate from the existing "Legal Advisory" property).
+  Uncommented in commit `7836400`.
+- **Meta Pixel:** Pixel ID `1754463085876673`, created under the "Bright Future Public School"
+  Business Manager in Events Manager. Uncommented in commit `dc4a4d5`.
+- Both `gtag('event', 'generate_lead')` and `fbq('track', 'Lead')` fire in the form submit handler
+  **after** the Apps Script webhook call already succeeds, so activating tracking made zero change
+  to the lead-capture path (verified via clean `git diff` before each commit — only the tracking
+  blocks and those two lines changed).
+- Verified via: `curl`-polling the live GitHub Pages URL after each push until each real ID
+  appeared in the served HTML (confirmed both times).
+- Not yet done: no live check of actual GA4 Realtime / Events Manager Test Events dashboards to see
+  a pageview/lead event register end-to-end — the code path is confirmed deployed and correct, but
+  a real-traffic dashboard check hasn't been done. Worth a quick look next time either dashboard is
+  opened, not urgent.
 
 ## Hosting
 
@@ -75,12 +85,12 @@ settings.local.json`'s command allowlist (confirms GitHub Pages + repo identity)
 
 ## Known gaps (carried forward)
 
-1. **GA4 Measurement ID and Meta Pixel ID are placeholders** — needs real IDs from Gaurav/Garv
-   (create a GA4 property + a Meta Pixel in Events Manager) before tracking goes live. See
-   `CLAUDE_CODE_PROMPTS.md`.
+1. ~~GA4/Meta Pixel IDs are placeholders~~ — **resolved 2026-09-11**, see Tracking section above.
 2. **No custom domain** — currently on the default `github.io` subdomain; not requested, just
    noting it's an option if wanted later.
 3. **Outer `BFPS Landing Page` staging folder** (sibling, one level up) still holds two unused
    source design files (`ChatGPT Image ... (ALL 3).png`, `Watermark.jpg`) that were never
    integrated into the site — not a blocker, just unclaimed material; flag to Gaurav/Garv if they
    were meant to be used somewhere and got dropped.
+4. **Tracking dashboards not yet spot-checked** — see the last bullet of the Tracking section
+   above; low priority.

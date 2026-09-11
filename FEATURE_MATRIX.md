@@ -23,14 +23,13 @@ re-verify rows marked ✅ "just in case"; only re-check a row a specific new cha
 | 14 | Lead webhook → Google Sheet (Apps Script) | ✅ | Column-mapping bug fixed (maps by header name, not position) — see `webhook/README.md`. `doTest()` helper added for safe manual verification. |
 | 15 | Asset drop-in convention (logos/photos/guide) | ✅ | READMEs in each `assets/*` folder; all three asset sets already dropped in and committed. |
 | 16 | GitHub Pages hosting | ✅ | Live at `https://gauravtej3.github.io/bfps-landing-page/`, `status: built`, HTTPS enforced, serving `main` branch root. |
-| 17 | Google Analytics 4 (GA4) | 🟡 | Script block present but commented out; Measurement ID is still the placeholder `G-XXXXXXXXXX`. Needs a real GA4 property + ID. |
-| 18 | Meta/Facebook Pixel | 🟡 | Script block present but commented out; Pixel ID is still the placeholder `YOUR_PIXEL_ID`. Needs a real Pixel ID from Meta Events Manager. |
-| 19 | GA4/Pixel conversion event on form submit | 🟡 | Commented-out `gtag('event', 'generate_lead')` placeholder exists in the submit handler in `index.html`; inactive until #17/#18 are live. |
+| 17 | Google Analytics 4 (GA4) | ✅ | Active. Measurement ID `G-HBJ1F42B4G` (property "BFPS Jaipur Landing Page"). Activated 2026-09-11, confirmed live on the page (commit `7836400`). |
+| 18 | Meta/Facebook Pixel | ✅ | Active. Pixel ID `1754463085876673`. Activated 2026-09-11, confirmed live on the page (commit `dc4a4d5`). |
+| 19 | GA4/Pixel conversion event on form submit | ✅ | `gtag('event', 'generate_lead')` and `fbq('track', 'Lead')` both fire after a lead form submission succeeds (after the webhook call, so the Sheet-save path is unaffected). |
 | 20 | Custom domain (vs. `github.io` subdomain) | ⬜ | Not requested/configured; currently on the default GitHub Pages subdomain. |
 | 21 | Admin/CMS UI inside the app | ⬜ (by design) | Not in scope — see `MASTER_SPEC.md` §9 and `ARCHITECTURE.md`'s admin access model. Content/data access is via GitHub + Google account access, not an in-app login. |
 
 ## Known blockers
 
-None currently — all rows above are either ✅ or 🟡-pending-a-value-only-Gaurav/Garv-can-supply
-(a GA4 Measurement ID and a Meta Pixel ID). No code work is blocked; the code path for both is
-already written and only needs the two real IDs swapped in and the comment blocks uncommented.
+None. As of 2026-09-11 every row is ✅ — GA4 and Meta Pixel tracking (rows 17–19) were the last
+open item and are now activated and confirmed live.

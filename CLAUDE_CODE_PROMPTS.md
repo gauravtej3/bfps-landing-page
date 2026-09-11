@@ -1,9 +1,10 @@
 # CLAUDE CODE PROMPTS — Phase by Phase (BFPS Landing Page)
 
-Ready-to-paste prompts for each phase of this project. Phases 1–8 are a **reconstructed record**
+Ready-to-paste prompts for each phase of this project. Phases 1–9 are a **reconstructed record**
 of work already completed (from git history) — kept so a new agent understands *how* the site was
-built without re-deriving it, and so nothing already-done gets redone. Phase 9 is the **actual next
-step**, ready to paste into a fresh Claude Code session as-is.
+built without re-deriving it, and so nothing already-done gets redone. As of 2026-09-11 the entire
+project (including tracking) is complete — see "Future phases" at the bottom for what's next
+whenever new work is requested.
 
 Before pasting any prompt below into a new session, that session should already read `AGENTS.md`
 (it will, automatically) — these prompts assume that context and don't repeat it.
@@ -57,32 +58,15 @@ Before pasting any prompt below into a new session, that session should already 
 
 ---
 
-## Phase 9 — Activate tracking (NEXT — not yet started)
-
-This is the only real remaining work. Paste this prompt once you have a real GA4 Measurement ID
-and/or Meta Pixel ID (fill in the blanks below first):
-
-> In `index.html`, activate analytics tracking:
->
-> 1. GA4 Measurement ID: `___________` (replace `G-XXXXXXXXXX`)
-> 2. Meta Pixel ID: `___________` (replace `YOUR_PIXEL_ID`)
->
-> Uncomment the GA4 `<script>` block and the Meta Pixel `<script>` block in the `<head>` (both are
-> currently HTML-commented out under "TRACKING PLACEHOLDERS"), replacing the placeholder IDs with
-> the real ones above. Then uncomment the `generate_lead` conversion-event call(s) in the form
-> submit handler so both the lead-magnet and admissions form submissions fire a conversion event.
-> Only touch tracking code — don't change page content, styling, or the webhook. Commit with a
-> message noting both IDs were activated (don't put the raw IDs' surrounding context in a way that
-> reads as a secret — they're analytics IDs, not credentials, so it's fine for them to appear in
-> the commit and in `index.html` itself, same as they will publicly in the page source).
->
-> After: verify by loading the live site with the browser's network tab open and confirming a
-> request fires to `google-analytics.com`/`googletagmanager.com` and to `facebook.com/tr` on page
-> load. Update `FEATURE_MATRIX.md` rows 17–19 to ✅ and `DEVELOPMENT_STATUS.md`'s "Tracking"
-> section once confirmed working, not before.
-
-If only one of the two IDs is available, do that one now and leave the other's placeholder/comment
-block untouched — don't half-activate a block with a fake ID.
+## Phase 9 — Activate tracking (DONE — 2026-09-11, commits `7836400`, `dc4a4d5`)
+> Activated in two steps as each ID became available: GA4 first (Measurement ID `G-HBJ1F42B4G`,
+> commit `7836400`), then Meta Pixel once the user created one in Events Manager (Pixel ID
+> `1754463085876673`, commit `dc4a4d5`). Both script blocks uncommented in `<head>`, both
+> conversion-event calls (`gtag('event', 'generate_lead')`, `fbq('track', 'Lead')`) uncommented in
+> the form submit handler. Each commit verified via a clean, minimal `git diff` and confirmed live
+> via a `curl`-poll of the deployed page after pushing. See `AGENT_HANDOFF.md` and
+> `DEVELOPMENT_STATUS.md`'s Tracking section for full detail. `FEATURE_MATRIX.md` rows 17–19 are
+> now ✅.
 
 ## Future phases (not yet requested — don't start without being asked)
 
