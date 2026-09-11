@@ -16,18 +16,16 @@
   gtag('config', 'G-HBJ1F42B4G');
 </script>
 
-<!-- Meta (Facebook/Instagram) Pixel - replace YOUR_PIXEL_ID with the real Pixel ID -->
-<!--
+<!-- Meta (Facebook/Instagram) Pixel - active, Pixel ID for BFPS Landing Page -->
 <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
   document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('init', '1754463085876673');
   fbq('track', 'PageView');
 </script>
--->
 <!-- ============================================================ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -556,7 +554,7 @@
       });
 
       // Meta Pixel / GA conversion event
-      // if (typeof fbq === 'function') fbq('track', 'Lead'); // Pixel not active yet
+      if (typeof fbq === 'function') fbq('track', 'Lead');
       if (typeof gtag === 'function') gtag('event', 'generate_lead');
 
       statusEl.classList.remove('text-gray-500');
